@@ -31,8 +31,6 @@ format:
 | **C** | Learning Paradigms + Problem Types + Summary | ~6 min |
 | All | Q&A | ~1 min |
 
-# Part A — Speaker A {background-color="#2c3e50"}
-
 ## What Is Statistical Learning?
 
 - We observe **inputs** ($X_1, X_2, \dots, X_p$) — also called *predictors*, *independent variables*, or *features*
@@ -86,8 +84,6 @@ Sometimes the goal is *understanding*, not just predicting. Key inference questi
 - Prediction example: direct-marketing campaign (who will respond?)
 - Inference example: which advertising media drive sales, and by how much?
 - Some problems need **both** (e.g., real estate pricing)
-
-# Part B — Speaker B {background-color="#2c3e50"}
 
 ## Training Data & the Estimation Task
 
@@ -145,8 +141,6 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 - **When inference is the goal**, simpler, more restrictive models are often preferred
 - **When prediction alone is the goal**, a more flexible model is *not always* better — it may overfit
 
-# Part C — Speaker C {background-color="#2c3e50"}
-
 ## Supervised vs. Unsupervised Learning
 
 **Supervised learning**
@@ -156,12 +150,7 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 **Unsupervised learning**
 
-- We observe $x_i$ but there is **no associated response** $y_i$
-- We're "working blind" — no response variable to supervise the analysis
-- Example task: **cluster analysis** — identifying distinct groups among observations (e.g., market segmentation)
-
-<!-- Insert Figure 2.8 here: clustering example with well-separated vs. overlapping groups -->
-![](images/fig2_8_clustering.png){fig-alt="Clustering example with well-separated and overlapping groups"}
+![](images/supervised_vs_unsupervised.png){width=70%}
 
 - Note: **semi-supervised learning** handles the in-between case, where only some observations have a response
 
