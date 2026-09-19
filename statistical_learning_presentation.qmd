@@ -189,7 +189,7 @@ Y_i \in {cat, dog, hat, mug}
 1 \leq i \leq n
 $$
 
-
+![](images/cat.png){width=50%}
 
 ## The crabs from Naples bay
 
