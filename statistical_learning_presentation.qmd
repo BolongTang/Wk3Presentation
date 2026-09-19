@@ -147,6 +147,7 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 ## The crabs from Naples bay
 In 1892, scientists collected data on populations of the crab, Carcinus maenas, and recorded the ratio of forehead width to the body length...
+
 - What is the distribution of the ratio?
 
 ## The crabs from Naples bay
