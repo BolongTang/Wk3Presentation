@@ -147,11 +147,13 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 ## More rigorously,
 
-Supervised Learning: observe $$ (X,Y) \sim P_{X,Y} $$ unknown
-- Goal: learn a function $$f$$, such that $$ f(X) \approx Y $$
+Supervised Learning: observe $ (X,Y) \sim P_{X,Y} $ unknown
 
-Unsupervised Learning: observe $$ X \sim P_X $$ unknown
-- Goal: discover underlying structure of $$P_X$$
+- Goal: learn a function $f$, such that $ f(X) \approx Y $
+
+Unsupervised Learning: observe $ X \sim P_X $ unknown
+
+- Goal: discover underlying structure of $P_X$
 
 ## The crabs from Naples bay
 
