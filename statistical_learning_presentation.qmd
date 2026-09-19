@@ -145,6 +145,14 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 ![](images/supervised_vs_unsupervised.png){width=70%}
 
+## More rigorously,
+
+Supervised Learning: observe $$ (X,Y) \sim P_{X,Y} $$ unknown
+- Goal: learn a function $$f$$, such that $$ f(X) \approx Y $$
+
+Unsupervised Learning: observe $$ X \sim P_X $$ unknown
+- Goal: discover underlying structure of $$P_X$$
+
 ## The crabs from Naples bay
 
 In 1892, scientists collected data on populations of the crab, Carcinus maenas, and recorded the ratio of forehead width to the body length...
