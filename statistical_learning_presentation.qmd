@@ -157,6 +157,15 @@ In 1892, scientists collected data on populations of the crab, Carcinus maenas, 
 
 Why doesn't the ratio follow a Gaussian distribution?
 
+## One guess...
+
+![](images/GMM.png){width=45%}
+
+This distribution could be the result of the population being a mix of two different Gaussian distributions (two sub-species)
+
+- $$ X \sim \pi_1 \mathcal{N}(\mu_1,\sigma_1^2) + (1-\pi_1) \mathcal{N}(\mu_2,\sigma_2^2),$$
+- Gaussian mixture model ([read more](https://mbernste.github.io/posts/gmm_em/))
+
 ## Regression vs. Classification Problems
 
 - **Quantitative** response (numerical values, e.g., price, income, age) → typically a **regression** problem
