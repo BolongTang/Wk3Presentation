@@ -143,16 +143,7 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 ## Supervised vs. Unsupervised Learning
 
-**Supervised learning**
-
-- Each observation $x_i$ has an associated response $y_i$
-- Goal: fit a model relating the predictors to the response (most methods in this course)
-
-**Unsupervised learning**
-
 ![](images/supervised_vs_unsupervised.png){width=70%}
-
-- Note: **semi-supervised learning** handles the in-between case, where only some observations have a response
 
 ## Regression vs. Classification Problems
 
