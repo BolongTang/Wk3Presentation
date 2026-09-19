@@ -204,9 +204,27 @@ For each image, $i = 1,\ldots,n$.
 :::
 ::::
 
-## Unsupervised learning - Clustering
+## Clustering {.smaller}
 
-![](images/clustering.png){width=70%}
+:::: {.columns}
+::: {.column width="65%"}
+![](images/clustering.png){width=100% .nostretch fig-alt="Unlabeled observations and three clusters based on symptom frequency and severity."}
+:::
+
+::: {.column width="35%"}
+::::: {style="font-size: 0.85em;"}
+**Finding groups without labels**
+
+- We observe features $X$, without response labels $Y$.
+- Clustering groups observations with similar feature values.
+- Here, three clusters are identified based on symptom frequency and severity.
+:::::
+:::
+::::
+
+::: {style="font-size: 0.85em;"}
+**The colors represent groups found by the algorithm, not labels supplied beforehand.**
+:::
 
 ## The crabs from Naples bay
 
