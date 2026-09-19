@@ -145,19 +145,16 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 ![](images/supervised_vs_unsupervised.png){width=70%}
 
-## More rigorously {.smaller}
+## More rigorously, {.smaller}
 
 :::: {.columns}
 ::: {.column width="47%"}
-### Supervised learning
 
-Observe predictors **and responses**:
+Supervised learning: observe
 
 $$
 (X,Y) \sim P_{X,Y}
 $$
-
-The joint distribution $P_{X,Y}$ is unknown.
 
 **Goal:** learn a function $f$ to predict $Y$ from $X$.
 
@@ -167,15 +164,12 @@ $$
 :::
 
 ::: {.column width="47%"}
-### Unsupervised learning
 
-Observe **predictors only**:
+Unsupervised learning: observe
 
 $$
 X \sim P_X
 $$
-
-The distribution $P_X$ is unknown.
 
 **Goal:** discover the underlying structure of $P_X$.
 :::
