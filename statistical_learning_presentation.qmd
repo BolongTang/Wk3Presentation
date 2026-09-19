@@ -177,23 +177,75 @@ $$
 
 ## Exam score prediction {.smaller}
 
-![](images/linear_reg.png){width=70%}
+:::: {.columns}
+::: {.column width="40%"}
+![](images/linear_reg.png){width=100% .nostretch fig-alt="A straight line fitted to observations, illustrating linear regression."}
 
-Imagine you want to predict a student's exam score based on the number of hours they study.
+**Regression:** predict a numerical value.
+:::
 
-- X: 
-- Y:
-- f(X) = ...
+::: {.column width="58%"}
+::::: {style="font-size: 0.85em;"}
+**Input and response**
+
+- $X$: number of hours studied.
+- $Y$: exam score, measured in points.
+
+**Model: simple linear regression**
+
+$$
+\begin{aligned}
+f(X) &= \beta_0 + \beta_1 X \\
+Y &= f(X) + \epsilon
+\end{aligned}
+$$
+
+$\beta_0$ is the intercept; $\beta_1$ is the slope.
+$\epsilon$ captures variation not explained by study hours.
+
+**Fit and predict**
+
+Fit by **least squares**. For $x$ study hours, predict
+$\hat{Y}=\hat{\beta}_0+\hat{\beta}_1x$.
+:::::
+:::
+::::
 
 ## Email spam detection {.smaller}
 
-![](images/logistic_reg.png){width=70%}
+:::: {.columns}
+::: {.column width="40%"}
+![](images/logistic_reg.png){width=100% .nostretch fig-alt="An S-shaped logistic curve illustrating probabilities between zero and one."}
 
-You want to decide if an incoming email is spam (1) or not spam (0).
+**Classification:** predict a category.
+:::
 
-- X: 
-- Y:
-- f(X) = \sigma() where \sigma() = ... called logistic function
+::: {.column width="58%"}
+::::: {style="font-size: 0.85em;"}
+**Input and response**
+
+- $X$: email features (e.g. word frequencies and link count).
+- $Y=1$: spam; $Y=0$: not spam.
+
+**Model: logistic regression**
+
+$$
+\begin{aligned}
+f(X) &= P(Y=1\mid X) = \sigma(z) \\
+\sigma(z) &= \frac{1}{1+e^{-z}}
+\end{aligned}
+$$
+
+Here, $z=\beta_0+\beta_1X_1+\cdots+\beta_pX_p$.
+The **logistic function** $\sigma$ returns a probability.
+
+**Fit and predict**
+
+Learn coefficients from labeled emails.
+With a **0.5 threshold**: $\hat{p}(x)\geq0.5$ means spam; otherwise, not spam.
+:::::
+:::
+::::
 
 ## Image recognition {.smaller}
 
