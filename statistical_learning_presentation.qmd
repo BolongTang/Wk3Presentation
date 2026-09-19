@@ -202,11 +202,6 @@ $$
 
 $\beta_0$ is the intercept; $\beta_1$ is the slope.
 $\epsilon$ captures variation not explained by study hours.
-
-**Fit and predict**
-
-Fit by **least squares**. For $x$ study hours, predict
-$\hat{Y}=\hat{\beta}_0+\hat{\beta}_1x$.
 :::::
 :::
 ::::
@@ -216,8 +211,6 @@ $\hat{Y}=\hat{\beta}_0+\hat{\beta}_1x$.
 :::: {.columns}
 ::: {.column width="40%"}
 ![](images/logistic_reg.png){width=100% .nostretch fig-alt="An S-shaped logistic curve illustrating probabilities between zero and one."}
-
-**Classification:** predict a category.
 :::
 
 ::: {.column width="58%"}
@@ -238,11 +231,6 @@ $$
 
 Here, $z=\beta_0+\beta_1X_1+\cdots+\beta_pX_p$.
 The **logistic function** $\sigma$ returns a probability.
-
-**Fit and predict**
-
-Learn coefficients from labeled emails.
-With a **0.5 threshold**: $\hat{p}(x)\geq0.5$ means spam; otherwise, not spam.
 :::::
 :::
 ::::
