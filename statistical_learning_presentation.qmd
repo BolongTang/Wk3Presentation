@@ -175,6 +175,22 @@ $$
 :::
 ::::
 
+## Linear regression
+
+## Logistic regression
+
+## Image recognition
+
+For image data, we observe $n$ images with annotated labels
+
+$$
+Y_i \in {cat, dog, hat, mug}
+\quad
+1 \leq i \leq n
+$$
+
+
+
 ## The crabs from Naples bay
 
 In 1892, scientists collected data on populations of the crab, Carcinus maenas, and recorded the ratio of forehead width to the body length...
