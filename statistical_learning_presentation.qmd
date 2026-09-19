@@ -179,17 +179,30 @@ $$
 
 ## Logistic regression
 
-## Image recognition
+## Image recognition {.smaller}
 
-For image data, we observe $n$ images with annotated labels
+:::: {.columns}
+::: {.column width="55%"}
+![](images/cat.png){width=100% .nostretch fig-alt="A cat image represented by pixel values, with predicted class probabilities."}
+:::
+
+::: {.column width="43%"}
+### From pixels to labels
+
+We observe $n$ images with annotated labels.
+
+- $X_i$: the pixel values of image $i$.
+- $Y_i$: its class label.
 
 $$
-Y_i \in {cat, dog, hat, mug}
-\quad
-1 \leq i \leq n
+Y_i \in \{\text{cat},\,\text{dog},\,\text{hat},\,\text{mug}\}
 $$
 
-![](images/cat.png){width=50%}
+For each image, $i = 1,\ldots,n$.
+
+**Goal:** predict the label of a new image.
+:::
+::::
 
 ## The crabs from Naples bay
 
