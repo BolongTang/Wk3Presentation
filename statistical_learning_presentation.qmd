@@ -223,7 +223,7 @@ For each image, $i = 1,\ldots,n$.
 ::::
 
 ::: {style="font-size: 0.85em;"}
-**The colors represent groups found by the algorithm, not labels supplied beforehand.**
+**A classical algorithm: K-means**
 :::
 
 ## The crabs from Naples bay
