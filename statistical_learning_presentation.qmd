@@ -168,26 +168,205 @@ This distribution could be the result of the population being a mix of two diffe
 
 ## Regression vs. Classification Problems
 
-- **Quantitative** response (numerical values, e.g., price, income, age) → typically a **regression** problem
-- **Qualitative / categorical** response (e.g., brand purchased, default: yes/no, cancer diagnosis) → typically a **classification** problem
 
-- Common associations:
-  - Linear regression ↔ quantitative response
-  - Logistic regression ↔ qualitative (binary) response — though it estimates class *probabilities*, so it can also be viewed as a regression method
-- The type of **predictor** (quantitative vs. qualitative) matters less — qualitative predictors just need to be properly **coded** before analysis (covered in Chapter 3)
-- Some methods (e.g., K-nearest neighbors) apply to both regression and classification problems
+**Quantitative** – Takes numerical values
 
-## Summary — Key Takeaways
+For example: Age, income, value of a house, stock price
 
-- Statistical learning is a set of approaches for estimating the unknown function $f$ relating $X$ to $Y$
-- Two main goals: **prediction** vs. **inference**
-- Two main estimation strategies: **parametric** vs. **non-parametric**
-- A fundamental trade-off: **flexibility** vs. **interpretability**
-- Two learning paradigms: **supervised** vs. **unsupervised**
-- Two problem types: **regression** (quantitative) vs. **classification** (qualitative)
+**Qualitative** (also commonly called categorical) – Takes one of $K$ classes
+
+For example: Default? (Yes or no), Disease diagnosis (positive or negative), marital status
+
+## In general, response determines our problem
+
+- If our response is quantitative, we have a regression problem.
+  - For example, least squares to predict house value
+- If our response is qualitative, we have a classification problem.
+  - For example, a logistic regression to predict yes or no default
+
+## Of course there are nuances!
+
+Like the fact that input features can be a mix. I.e. using qualitative data (name of neighborhood) to regress house price.
+
+And how logistic REGRESSION being a CLASSIFICATION method. But also estimates class probabilities, which are numbers.
+
+## KNN works for both!
+
+To predict a point $x_0$, find the $K$ training observations closest to $x_0$ (and call this set $N_0$). Then summarize their responses.
+
+For regression (with a quantitative $y$)
+
+- Neighbor responses are numbers
+- Summary is an average
+- Formula is
+
+$$\hat f(x_0) = \frac{1}{K}\sum_{x_i \in N_0} y_i$$
+
+## KNN works for both! (continued)
+
+For classification (qualitative $y$)
+
+- Neighbor responses are labels
+- Summary is a majority vote
+- Formula is
+
+$$\hat P(Y = j \mid x_0) = \frac{1}{K}\sum_{x_i \in N_0} I(y_i = j)$$
+
+where $I(y_i = j)$ is 1 if neighbor $i$ is in class $j$ and 0 otherwise.
+
+## Why does KNN work for both?
+
+- KNN assumes no functional form for $f(X)$.
+- It is non-parametric, nothing requires a numeric $y$.
+- All it really needs is:
+  - Some notion of "closest" in the predictor space
+  - Some way to summarize the response of the neighbors
+- In contrast, least squares is built upon squared residuals, which very much requires a numeric response.
+
+## Example
+
+A new house: **1,800 sq ft, 15 years old**. Find its $K = 5$ nearest neighbors.
+
+| Neighbor | 1 | 2 | 3 | 4 | 5 |
+|---|---|---|---|---|---|
+| Sale price (\$K) | 410 | 430 | 445 | 460 | 480 |
+| Sold above asking? | Yes | Yes | No | Yes | No |
+
+- **Regression** (response = price): average → **\$445K**
+- **Classification** (response = above asking?): 3 Yes, 2 No → vote **Yes**, estimated P(Yes) = 0.6
+
+## Example
+
+```{python}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 5
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Ellipse
+
+rng = np.random.default_rng(7)
+sd_x, sd_y = 300.0, 10.0            # scales used to standardize distance
+q = np.array([1800.0, 15.0])        # query house (sq ft, age)
+
+# 5 neighbors, placed close to the query (offsets in standardized units)
+off = np.array([[0.55, 0.35], [-0.65, 0.3], [0.15, -0.7], [-0.5, -0.5], [0.8, -0.25]])
+nb = q + off * np.array([sd_x, sd_y])
+prices = [410, 430, 445, 460, 480]
+above = [True, True, False, True, False]
+radius = 1.0                        # in standardized units
+
+# Background houses: far enough that they are NOT neighbors
+bg = []
+while len(bg) < 35:
+    p = np.array([rng.uniform(1000, 2600), rng.uniform(0, 40)])
+    if np.hypot((p[0] - q[0]) / sd_x, (p[1] - q[1]) / sd_y) > 1.35:
+        bg.append(p)
+bg = np.array(bg)
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 5), sharex=True, sharey=True)
+
+def base(ax, title):
+    ax.scatter(bg[:, 0], bg[:, 1], c="lightgrey", s=40, zorder=1)
+    ax.add_patch(Ellipse(q, 2 * radius * sd_x, 2 * radius * sd_y, fill=False,
+                         ls="--", lw=1.8, ec="black", zorder=2))
+    ax.scatter(*q, marker="*", s=300, c="gold", ec="black", zorder=5)
+    ax.set_title(title, fontsize=13, fontweight="bold")
+    ax.set_xlabel("Square footage")
+    ax.set_xlim(900, 2700); ax.set_ylim(-3, 43)
+
+# Left: regression
+ax = axes[0]
+base(ax, "Response = sale price (quantitative)")
+ax.scatter(nb[:, 0], nb[:, 1], c="tab:blue", s=90, ec="black", zorder=4)
+for (x, y), pr, o in zip(nb, prices, off):
+    ax.annotate(f"${pr}K", (x, y), textcoords="offset points",
+                xytext=(16 * np.sign(o[0]), 10 * np.sign(o[1])),
+                ha="center", va="center", fontsize=11)
+ax.set_ylabel("Age (years)")
+ax.text(0.5, -0.25, "average of 5 prices  →  $445K", transform=ax.transAxes,
+        ha="center", fontsize=14, fontweight="bold", color="tab:blue")
+
+# Right: classification
+ax = axes[1]
+base(ax, "Response = sold above asking? (qualitative)")
+cols = ["tab:green" if a else "tab:red" for a in above]
+ax.scatter(nb[:, 0], nb[:, 1], c=cols, s=90, ec="black", zorder=4)
+for (x, y), a, o in zip(nb, above, off):
+    ax.annotate("Yes" if a else "No", (x, y), textcoords="offset points",
+                xytext=(14 * np.sign(o[0]), 10 * np.sign(o[1])),
+                ha="center", va="center", fontsize=11)
+ax.text(0.5, -0.25, "majority vote  →  Yes (P = 0.6)", transform=ax.transAxes,
+        ha="center", fontsize=14, fontweight="bold", color="tab:green")
+
+fig.text(0.5, 0.995, "★ = new house   |   dashed circle = its 5 nearest neighbors (distance on standardized axes)",
+         ha="center", va="top", fontsize=11)
+fig.subplots_adjust(bottom=0.27, top=0.85, wspace=0.08)
+plt.show()
+```
+
+## Another look at the bias-variance tradeoff
+
+- $K = 1$: interpolates training data, low bias, high variance
+- Larger $K$: Smoother fit, higher bias, lower variance
+- How do we choose the best $K$? Test-error estimates will likely be in a future presentation!
+
+## $K = 1$ vs. a smoother fit
+
+```{python}
+#| echo: false
+#| fig-width: 11
+#| fig-height: 4.6
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(3)
+n = 100
+x = rng.uniform(-1, 1, n)
+f = lambda t: 2 + 1.5 * np.sin(2.5 * t)      # true relationship
+y = f(x) + rng.normal(0, 0.4, n)
+
+grid = np.linspace(-1, 1, 1000)
+
+def knn_fit(grid, x, y, K):
+    d = np.abs(grid[:, None] - x[None, :])    # distances to each training point
+    idx = np.argsort(d, axis=1)[:, :K]        # K nearest neighbors
+    return y[idx].mean(axis=1)                # average their responses
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4.6), sharey=True)
+for ax, K, ttl in zip(axes, [1, 15], ["K = 1: interpolates the training data",
+                                       "K = 15: smoother fit"]):
+    ax.scatter(x, y, c="black", s=20, zorder=3, label="training data")
+    ax.plot(grid, f(grid), c="black", lw=2, label="true f(X)")
+    ax.plot(grid, knn_fit(grid, x, y, K), c="tab:blue", lw=2.5, label=f"KNN, K = {K}")
+    ax.set_title(ttl, fontsize=13, fontweight="bold")
+    ax.set_xlabel("x")
+    ax.legend(loc="upper left", fontsize=10)
+axes[0].set_ylabel("y")
+fig.tight_layout()
+plt.show()
+```
+
+## Sneak peek of chapter 3
+
+- "Works for both" does not always mean the best
+- You will see how, if a relationship is roughly linear, linear regression often beats KNN
+- Curse of dimensionality
+- Linear regression gives coefficients and p-values, KNN gives predictions only. Interpretability.
+
+---
+
+When we choose methods, we tend to choose based on whether the response is quantitative or qualitative.
+
+Whether the predictors are quantitative or qualitative is "generally considered less important."
+
+GIVEN THAT: your qualitative predictors are coded properly?
+
+How do I code qualitative predictors properly? Go read 3.3.1
+
 
 ## Thank You
 
 **Questions?**
-
-Speaker A · Speaker B · Speaker C
