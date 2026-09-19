@@ -155,7 +155,7 @@ In 1892, scientists collected data on populations of the crab, Carcinus maenas, 
 
 ![](images/skewed.png){width=70%}
 
-Why isn't it a Gaussian distribution?
+Why doesn't the ratio follow a Gaussian distribution?
 
 ## Regression vs. Classification Problems
 
