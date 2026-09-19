@@ -204,7 +204,7 @@ For each image, $i = 1,\ldots,n$.
 :::
 ::::
 
-## Clustering {.smaller}
+## Unsupervised learning - clustering {.smaller}
 
 :::: {.columns}
 ::: {.column width="65%"}
