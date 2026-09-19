@@ -175,9 +175,9 @@ $$
 :::
 ::::
 
-## Linear regression
+## Linear regression {.smaller}
 
-## Logistic regression
+## Logistic regression {.smaller}
 
 ## Image recognition {.smaller}
 
@@ -203,6 +203,10 @@ For each image, $i = 1,\ldots,n$.
 **Goal:** predict the label of a new image.
 :::
 ::::
+
+## Unsupervised learning - Clustering
+
+![](images/clustering.png){width=70%}
 
 ## The crabs from Naples bay
 
