@@ -180,8 +180,6 @@ $$
 :::: {.columns}
 ::: {.column width="40%"}
 ![](images/linear_reg.png){width=100% .nostretch fig-alt="A straight line fitted to observations, illustrating linear regression."}
-
-**Regression:** predict a numerical value.
 :::
 
 ::: {.column width="58%"}
