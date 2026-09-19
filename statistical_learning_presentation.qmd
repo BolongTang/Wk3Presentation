@@ -145,6 +145,16 @@ $$ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p $$
 
 ![](images/supervised_vs_unsupervised.png){width=70%}
 
+## The crabs from Naples bay
+In 1892, scientists collected data on populations of the crab, Carcinus maenas, and recorded the ratio of forehead width to the body length...
+- What is the distribution of the ratio?
+
+## The crabs from Naples bay
+
+![](images/skewed.png){width=70%}
+
+Why isn't it a Gaussian distribution?
+
 ## Regression vs. Classification Problems
 
 - **Quantitative** response (numerical values, e.g., price, income, age) → typically a **regression** problem
