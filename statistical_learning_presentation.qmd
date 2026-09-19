@@ -175,9 +175,25 @@ $$
 :::
 ::::
 
-## Linear regression {.smaller}
+## Exam score prediction {.smaller}
 
-## Logistic regression {.smaller}
+![](images/linear_reg.png){width=70%}
+
+Imagine you want to predict a student's exam score based on the number of hours they study.
+
+- X: 
+- Y:
+- f(X) = ...
+
+## Email spam detection {.smaller}
+
+![](images/logistic_reg.png){width=70%}
+
+You want to decide if an incoming email is spam (1) or not spam (0).
+
+- X: 
+- Y:
+- f(X) = \sigma() where \sigma() = ... called logistic function
 
 ## Image recognition {.smaller}
 
