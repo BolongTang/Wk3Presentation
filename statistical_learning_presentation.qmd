@@ -316,6 +316,12 @@ X \sim \pi_1\,\mathrm{N}(\mu_1,\sigma_1^2)
 \qquad 0 \leq \pi_1 \leq 1.
 $$
 
+## Difficulties of unsupervised learning problems {.smaller}
+
+- The same observed pattern may have multiple explanations—for example, a single non-Gaussian population or a mixture of two Gaussian populations.
+- Inferring structure requires assumptions about the number of underlying groups and their distributions.
+- A model that fits the data well does not necessarily recover the true underlying structure.
+
 ## Regression vs. Classification Problems
 
 
