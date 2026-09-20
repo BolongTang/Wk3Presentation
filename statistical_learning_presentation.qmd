@@ -252,7 +252,7 @@ $$
 Y_i \in \{\text{cat},\,\text{dog},\,\text{hat},\,\text{mug}\}
 $$
 
-For each image, $i = 1,\ldots,n$.
+$i = 1,\ldots,n$.
 
 **Goal:** predict the label of a new image.
 :::
