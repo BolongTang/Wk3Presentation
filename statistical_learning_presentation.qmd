@@ -278,6 +278,8 @@ $i = 1,\ldots,n$.
 
 ::: {style="font-size: 0.85em;"}
 **A classical algorithm: K-means**
+
+[Read more](https://stanford.edu/~cpiech/cs221/handouts/kmeans.html)
 :::
 
 ## The crabs from Naples bay
