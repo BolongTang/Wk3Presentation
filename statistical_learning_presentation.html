@@ -6,11 +6,11 @@
 <script src="statistical_learning_presentation_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="statistical_learning_presentation_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="statistical_learning_presentation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="statistical_learning_presentation_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.38">
+<link href="statistical_learning_presentation_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Bolong Tang · Peize Zhang · Yi Zhi Zhang">
-  <meta name="dcterms.date" content="2026-09-19">
+  <meta name="dcterms.date" content="2026-09-21">
   <title>Statistical Learning: An Introduction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,10 +21,13 @@
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -137,18 +140,17 @@
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Bolong Tang · Peize Zhang · Yi Zhi Zhang 
+Bolong Tang · Peize Zhang · Yi Zhi Zhang
 </div>
 </div>
 </div>
 
-  <p class="date">2026-09-19</p>
+  <p class="date">2026-09-21</p>
 </section>
 <section id="talk-overview" class="slide level2 smaller center">
 <h2>Talk Overview</h2>
 <ul>
-<li><strong>20-minute</strong> group presentation, 3 speakers</li>
-<li>Covers all of Section 2.1 of <em>An Introduction to Statistical Learning</em>:
+<li>Section 2.1 of <em>An Introduction to Statistical Learning</em>:
 <ol type="1">
 <li>What Is Statistical Learning?</li>
 <li>Why Estimate <em>f</em>?</li>
@@ -158,52 +160,55 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 <li>Regression vs.&nbsp;Classification Problems</li>
 </ol></li>
 </ul>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Speaker</th>
-<th>Topics</th>
-<th>Time</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>A</strong></td>
-<td>Intro + Why Estimate <em>f</em></td>
-<td>~6 min</td>
-</tr>
-<tr class="even">
-<td><strong>B</strong></td>
-<td>How Do We Estimate <em>f</em> + Trade-Offs</td>
-<td>~7 min</td>
-</tr>
-<tr class="odd">
-<td><strong>C</strong></td>
-<td>Learning Paradigms + Problem Types + Summary</td>
-<td>~6 min</td>
-</tr>
-<tr class="even">
-<td>All</td>
-<td>Q&amp;A</td>
-<td>~1 min</td>
-</tr>
-</tbody>
-</table>
+</section>
+<section id="knowing-by-predicting" class="slide level2 center">
+<h2>Knowing by Predicting</h2>
+<ul>
+<li>What’s common between a store’s sales, a car’s rating, an university’s reputation, and your expected lifespan?</li>
+</ul>
+</section>
+<section id="knowing-by-predicting-1" class="slide level2 center">
+<h2>Knowing by Predicting</h2>
+<ul>
+<li>What’s common between a store’s sales, a car’s rating, an university’s reputation, and your expected lifespan?</li>
+<li>They are all factors that can be predicted from other factors.</li>
+</ul>
+</section>
+<section id="knowing-by-predicting-2" class="slide level2 center">
+<h2>Knowing by Predicting</h2>
+<ul>
+<li>A store’s sales: budget across TV, radio, and newspaper, etc.</li>
+<li>A car’s rating: newness, size, maximal acceleration, comfort level, etc.</li>
+<li>A university’s reputation: faculty members’ total amount of citations, academic awards won; its acceptance rate, external rankings, its employer trust, etc.</li>
+<li>Your expected lifespan: hours of sleep per day, calories intake, smoke or not, family earning bracket, disabilities, etc.</li>
+</ul>
+<aside class="notes">
+<p>That’s right!</p>
+<p>In short, each of them may be seen as an output, aka a response or dependent variable, a function of other predictors, aka features, indep vars, etc.</p>
+<p>In order to develop models which best predict those outputs, we want the models to approximate the function as closely as possible, based on only the data we know. This is the whole purpose of statistical learning, which is the topic of this semester.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-is-statistical-learning" class="slide level2 center">
 <h2>What Is Statistical Learning?</h2>
 <ul>
 <li>We observe <strong>inputs</strong> (<span class="math inline">\(X_1, X_2, \dots, X_p\)</span>) — also called <em>predictors</em>, <em>independent variables</em>, or <em>features</em></li>
-<li>We observe an <strong>output</strong> (<span class="math inline">\(Y\)</span>) — also called the <em>response</em> or <em>dependent variable</em></li>
-<li>General relationship:</li>
-</ul>
-<p><span class="math display">\[ Y = f(X) + \epsilon \]</span></p>
-<ul>
+<li>We observe an <strong>output</strong> (<span class="math inline">\(Y\)</span>) — also called the <em>response</em> or <em>dependent variable</em> <span class="math display">\[ Y = f(X) + \epsilon \]</span></li>
 <li><span class="math inline">\(f\)</span>: an unknown, fixed function representing the systematic information <span class="math inline">\(X\)</span> provides about <span class="math inline">\(Y\)</span></li>
 <li><span class="math inline">\(\epsilon\)</span>: a random error term, independent of <span class="math inline">\(X\)</span>, with mean zero</li>
 </ul>
 <aside class="notes">
 <p>Motivate with the Advertising dataset: sales as a function of TV, radio, and newspaper budgets. Goal is to estimate f.</p>
+<p>Our model would not be perfect. “All models are wrong, but some are useful.” So our goal is not to eliminate errors, but to keep the error reasonably small.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -220,25 +225,36 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 <h2>From One Predictor to Many</h2>
 <ul>
 <li>With a single predictor, <span class="math inline">\(f\)</span> can be visualized as a curve (e.g., income vs.&nbsp;years of education)</li>
-<li>With multiple predictors, <span class="math inline">\(f\)</span> becomes a surface in higher-dimensional space (e.g., income as a function of <em>years of education</em> <strong>and</strong> <em>seniority</em>)</li>
-<li>The true <span class="math inline">\(f\)</span> is generally <strong>unknown</strong> — we must estimate it from observed data</li>
 </ul>
 <!-- Insert Figure 2.2 (Income vs. years of education) and Figure 2.3 (two-predictor surface) here -->
 
-<img data-src="images/fig2_2_income_education.png" alt="Income data set: observed points and true f curve" class="r-stretch"></section>
+<img data-src="images/fig2_1_advertising.png" alt="Advertising data set: single predictors" class="r-stretch"></section>
+<section id="from-one-predictor-to-many-1" class="slide level2 center">
+<h2>From One Predictor to Many</h2>
+<ul>
+<li>With multiple predictors, <span class="math inline">\(f\)</span> becomes a surface in higher-dimensional space (e.g., income as a function of <em>years of education</em> <strong>and</strong> <em>seniority</em>)</li>
+</ul>
+
+<img data-src="images/fig2_2_income_education.png" alt="Income data set: multiple predictors" class="r-stretch"></section>
 <section id="why-estimate-f-prediction" class="slide level2 center">
 <h2>Why Estimate <em>f</em>? — Prediction</h2>
 <ul>
+<li>The true <span class="math inline">\(f\)</span> is generally <strong>unknown</strong> — we must estimate it from observed data</li>
 <li>When <span class="math inline">\(X\)</span> is available but <span class="math inline">\(Y\)</span> is not, we predict:</li>
 </ul>
 <p><span class="math display">\[ \hat{Y} = \hat{f}(X) \]</span></p>
 <ul>
 <li><span class="math inline">\(\hat{f}\)</span> is often treated as a <strong>black box</strong> — accuracy matters more than interpretability</li>
+</ul>
+</section>
+<section id="why-estimate-f-prediction-error" class="slide level2 center">
+<h2>Why Estimate <em>f</em>? — Prediction Error</h2>
+<ul>
 <li>Prediction accuracy depends on two sources of error:</li>
 </ul>
 <p><span class="math display">\[ E(Y - \hat{Y})^2 = \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{Reducible}} + \underbrace{\text{Var}(\epsilon)}_{\text{Irreducible}} \]</span></p>
 <ul>
-<li><strong>Reducible error</strong>: can be lowered by choosing a better statistical learning method</li>
+<li><strong>Reducible error</strong>: can be lowered by choosing a better statistical learning method (better approximator)</li>
 <li><strong>Irreducible error</strong>: a hard upper bound on accuracy — caused by unmeasured variables or inherent randomness in <span class="math inline">\(Y\)</span></li>
 </ul>
 <aside class="notes">
@@ -259,13 +275,34 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 <h2>Why Estimate <em>f</em>? — Inference</h2>
 <p>Sometimes the goal is <em>understanding</em>, not just predicting. Key inference questions:</p>
 <ul>
-<li><p><strong>Which predictors</strong> are associated with the response?</p></li>
-<li><p><strong>What is the relationship</strong> between each predictor and the response (positive, negative, complex)?</p></li>
-<li><p>Can the relationship be <strong>adequately summarized linearly</strong>, or is it more complicated?</p></li>
-<li><p>Prediction example: direct-marketing campaign (who will respond?)</p></li>
-<li><p>Inference example: which advertising media drive sales, and by how much?</p></li>
-<li><p>Some problems need <strong>both</strong> (e.g., real estate pricing)</p></li>
+<li><strong>Which predictors</strong> are associated with the response?</li>
+<li><strong>What is the relationship</strong> between each predictor and the response (positive, negative, complex)?</li>
+<li>Can the relationship be <strong>adequately summarized linearly</strong>, or is it more complicated?</li>
 </ul>
+</section>
+<section id="why-estimate-f-prediction-vs-inference" class="slide level2 center">
+<h2>Why Estimate <em>f</em>? — Prediction vs Inference</h2>
+<ul>
+<li>Prediction example: direct-marketing campaign (who will respond?)</li>
+<li>Inference example: which advertising media drive sales, and by how much?</li>
+<li>Some problems need <strong>both</strong> (e.g., real estate pricing)</li>
+<li>Real estate pricing:</li>
+<li>Prediction: How much will this house be worth?</li>
+<li>Inference: Why does this house worth this much?</li>
+</ul>
+<aside class="notes">
+<p>Prediction: It has 5 bedrooms, 3 bathrooms, 2 living rooms, 1 kitchen, etc., totally 300 square meters. Inference: Is it the size? the amount of rooms? or it being in a wealthy neighborhood? proximity to subway station?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="training-data-the-estimation-task" class="slide level2 center">
 <h2>Training Data &amp; the Estimation Task</h2>
@@ -283,12 +320,15 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 <h2>Parametric Methods</h2>
 <p>Two-step model-based approach:</p>
 <ol type="1">
-<li><strong>Assume a functional form</strong> for <span class="math inline">\(f\)</span> — e.g., a linear model:</li>
+<li><strong>Assume a functional form</strong> for <span class="math inline">\(f\)</span> — e.g., a multiple linear regression model:</li>
 </ol>
 <p><span class="math display">\[ f(X) = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p \]</span></p>
 <ol start="2" type="1">
 <li><strong>Fit / train</strong> the model using the training data — e.g., via (ordinary) least squares, to estimate <span class="math inline">\(\beta_0, \beta_1, \dots, \beta_p\)</span></li>
 </ol>
+</section>
+<section id="parametric-methods-1" class="slide level2 center">
+<h2>Parametric Methods</h2>
 <ul>
 <li>Reduces the problem from estimating an arbitrary <span class="math inline">\(p\)</span>-dimensional function to estimating <span class="math inline">\(p+1\)</span> coefficients</li>
 <li>Risk: if the assumed form is far from the true <span class="math inline">\(f\)</span>, the estimate will be poor</li>
@@ -300,28 +340,23 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 <h2>Non-Parametric Methods</h2>
 <ul>
 <li>Make <strong>no explicit assumption</strong> about the functional form of <span class="math inline">\(f\)</span></li>
-<li>Instead, seek an estimate that gets close to the data points without being too rough or too smooth</li>
 <li><strong>Advantage</strong>: can accurately fit a much wider range of shapes for <span class="math inline">\(f\)</span></li>
-<li><strong>Disadvantage</strong>: requires a far larger number of observations than parametric approaches</li>
 </ul>
 <!-- Insert Figure 2.5 (smooth spline) and Figure 2.6 (rough / overfit spline) side by side -->
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/fig2_5_smooth_spline.png" alt="Smooth thin-plate spline fit"></p>
-<figcaption>Smooth fit</figcaption>
-</figure>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="images/fig2_6_rough_spline.png" alt="Rough thin-plate spline fit with overfitting"></p>
-<figcaption>Rough, overfit fit</figcaption>
-</figure>
-</div>
-</div></div>
+
+<img data-src="images/fig2_5_smooth_spline.png" alt="Smooth thin-plate spline fit" class="r-stretch"></section>
+<section id="non-parametric-methods-1" class="slide level2 center">
+<h2>Non-Parametric Methods</h2>
 <ul>
+<li><strong>Disadvantages</strong>:</li>
+<li>requires a far larger number of observations than parametric approaches</li>
+<li>may easily overfit</li>
+</ul>
+</section>
+<section id="non-parametric-methods-2" class="slide level2 center">
+<h2>Non-Parametric Methods</h2>
+
+<img data-src="images/fig2_6_rough_spline.png" alt="Rough thin-plate spline fit with overfitting" class="r-stretch"><ul>
 <li>The rough fit makes <strong>zero errors on training data</strong> but is far more variable than the true <span class="math inline">\(f\)</span> — this is <strong>overfitting</strong></li>
 </ul>
 </section>
@@ -333,19 +368,116 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 </ul>
 <!-- Insert Figure 2.7 here: flexibility vs. interpretability plot -->
 
-<img data-src="images/fig2_7_flexibility_interpretability.png" alt="Trade-off between flexibility and interpretability across methods" class="r-stretch"><ul>
-<li>Roughly ordered from most interpretable / least flexible to least interpretable / most flexible:
-<ul>
-<li>Subset Selection, Lasso → Least Squares → GAMs, Trees → Bagging, Boosting → SVMs, Deep Learning</li>
-</ul></li>
-<li><strong>When inference is the goal</strong>, simpler, more restrictive models are often preferred</li>
-<li><strong>When prediction alone is the goal</strong>, a more flexible model is <em>not always</em> better — it may overfit</li>
-</ul>
-</section>
+<img data-src="images/fig2_7_flexibility_interpretability.png" style="width:50.0%" alt="Trade-off between flexibility and interpretability across methods" class="r-stretch"></section>
 <section id="supervised-vs.-unsupervised-learning" class="slide level2 center">
 <h2>Supervised vs.&nbsp;Unsupervised Learning</h2>
 
 <img data-src="images/supervised_vs_unsupervised.png" style="width:70.0%" class="r-stretch"></section>
+<section id="supervised-vs.-unsupervised-learning-rigorous" class="slide level2 center">
+<h2>Supervised vs.&nbsp;Unsupervised Learning (rigorous)</h2>
+<div class="columns">
+<div class="column" style="width:47%;">
+<p>Supervised learning: observe</p>
+<p><span class="math display">\[
+(X,Y) \sim P_{X,Y}
+\]</span></p>
+<p><strong>Goal:</strong> learn a function <span class="math inline">\(f\)</span> to predict <span class="math inline">\(Y\)</span> from <span class="math inline">\(X\)</span>.</p>
+<p><span class="math display">\[
+f(X) \approx Y
+\]</span></p>
+</div><div class="column" style="width:47%;">
+<p>Unsupervised learning: observe</p>
+<p><span class="math display">\[
+X \sim P_X
+\]</span></p>
+<p><strong>Goal:</strong> discover the underlying structure of <span class="math inline">\(P_X\)</span>.</p>
+</div></div>
+</section>
+<section id="exam-score-prediction" class="slide level2 smaller center">
+<h2>Exam score prediction</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/linear_reg.png" class="" style="width:100.0%" alt="A straight line fitted to observations, illustrating linear regression."></p>
+</div><div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
+<p><strong>Input and response</strong></p>
+<ul>
+<li><span class="math inline">\(X\)</span>: number of hours studied.</li>
+<li><span class="math inline">\(Y\)</span>: exam score, measured in points.</li>
+</ul>
+<p><strong>Model: simple linear regression</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+f(X) &amp;= \beta_0 + \beta_1 X \\
+Y &amp;= f(X) + \epsilon
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\(\beta_0\)</span> is the intercept; <span class="math inline">\(\beta_1\)</span> is the slope. <span class="math inline">\(\epsilon\)</span> captures variation not explained by study hours.</p>
+</div>
+</div></div>
+</section>
+<section id="email-spam-detection" class="slide level2 smaller center">
+<h2>Email spam detection</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/logistic_reg.png" class="" style="width:100.0%" alt="An S-shaped logistic curve illustrating probabilities between zero and one."></p>
+</div><div class="column" style="width:58%;">
+<div style="font-size: 0.85em;">
+<p><strong>Input and response</strong></p>
+<ul>
+<li><span class="math inline">\(X\)</span>: email features (e.g.&nbsp;word frequencies and link count).</li>
+<li><span class="math inline">\(Y=1\)</span>: spam; <span class="math inline">\(Y=0\)</span>: not spam.</li>
+</ul>
+<p><strong>Model: logistic regression</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+f(X) &amp;= P(Y=1\mid X) = \sigma(z) \\
+\sigma(z) &amp;= \frac{1}{1+e^{-z}}
+\end{aligned}
+\]</span></p>
+<p>Here, <span class="math inline">\(z=\beta_0+\beta_1X_1+\cdots+\beta_pX_p\)</span>. The <strong>logistic function</strong> <span class="math inline">\(\sigma\)</span> returns a probability.</p>
+</div>
+</div></div>
+</section>
+<section id="image-recognition" class="slide level2 smaller center">
+<h2>Image recognition</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/cat.png" class="" style="width:100.0%" alt="A cat image represented by pixel values, with predicted class probabilities."></p>
+</div><div class="column" style="width:43%;">
+<h3 id="from-pixels-to-labels">From pixels to labels</h3>
+<p>We observe <span class="math inline">\(n\)</span> images with annotated labels.</p>
+<ul>
+<li><span class="math inline">\(X_i\)</span>: the pixel values of image <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(Y_i\)</span>: its class label.</li>
+</ul>
+<p><span class="math display">\[
+Y_i \in \{\text{cat},\,\text{dog},\,\text{hat},\,\text{mug}\}
+\]</span></p>
+<p><span class="math inline">\(i = 1,\ldots,n\)</span>.</p>
+<p><strong>Goal:</strong> predict the label of a new image.</p>
+</div></div>
+</section>
+<section id="unsupervised-learning---clustering" class="slide level2 smaller center">
+<h2>Unsupervised learning - clustering</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<p><img data-src="images/clustering.png" class="" style="width:100.0%" alt="Unlabeled observations and three clusters based on symptom frequency and severity."></p>
+</div><div class="column" style="width:35%;">
+<div style="font-size: 0.85em;">
+<p><strong>Finding groups without labels</strong></p>
+<ul>
+<li>We observe features <span class="math inline">\(X\)</span>, without response labels <span class="math inline">\(Y\)</span>.</li>
+<li>Clustering groups observations with similar feature values.</li>
+<li>Here, three clusters are identified based on symptom frequency and severity.</li>
+</ul>
+</div>
+</div></div>
+<div style="font-size: 0.85em;">
+<p><strong>A classical algorithm: K-means</strong></p>
+<p><a href="https://stanford.edu/~cpiech/cs221/handouts/kmeans.html">Read more</a></p>
+</div>
+</section>
 <section id="the-crabs-from-naples-bay" class="slide level2 center">
 <h2>The crabs from Naples bay</h2>
 <p>In 1892, scientists collected data on populations of the crab, Carcinus maenas, and recorded the ratio of forehead width to the body length…</p>
@@ -358,13 +490,29 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 
 <img data-src="images/skewed.png" style="width:70.0%" class="r-stretch"><p>Why doesn’t the ratio follow a Gaussian distribution?</p>
 </section>
-<section id="one-guess" class="slide level2 center">
+<section id="one-guess" class="slide level2 smaller center">
 <h2>One guess…</h2>
-
-<img data-src="images/GMM.png" style="width:45.0%" class="r-stretch"><p>This distribution could be the result of the population being a mix of two different Gaussian distributions (two sub-species)</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img data-src="images/GMM.png" class="" style="width:100.0%"></p>
+</div><div class="column" style="width:45%;">
+<p>The observed distribution may combine <strong>two underlying populations</strong>.</p>
+<p>Each population is modeled by a Gaussian distribution.</p>
+<p>This is a <strong>Gaussian mixture model</strong>.</p>
+<p><a href="https://mbernste.github.io/posts/gmm_em/">Read more</a></p>
+</div></div>
+<p><span class="math display">\[
+X \sim \pi_1\,\mathrm{N}(\mu_1,\sigma_1^2)
++ (1-\pi_1)\,\mathrm{N}(\mu_2,\sigma_2^2),
+\qquad 0 \leq \pi_1 \leq 1.
+\]</span></p>
+</section>
+<section id="difficulties-of-unsupervised-learning-problems" class="slide level2 smaller center">
+<h2>Difficulties of unsupervised learning problems</h2>
 <ul>
-<li><span class="math display">\[ X \sim \pi_1 \mathcal{N}(\mu_1,\sigma_1^2) + (1-\pi_1) \mathcal{N}(\mu_2,\sigma_2^2),\]</span></li>
-<li>Gaussian mixture model (<a href="https://mbernste.github.io/posts/gmm_em/">read more</a>)</li>
+<li>The same observed pattern may have multiple explanations—for example, a single non-Gaussian population or a mixture of two Gaussian populations.</li>
+<li>Inferring structure requires assumptions about the number of underlying groups and their distributions.</li>
+<li>A model that fits the data well does not necessarily recover the true underlying structure.</li>
 </ul>
 </section>
 <section id="regression-vs.-classification-problems" class="slide level2 center">
@@ -467,7 +615,7 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 </section>
 <section id="example-1" class="slide level2 center">
 <h2>Example</h2>
-<div id="480ede0e" class="cell" data-fig-height="5" data-fig-width="11" data-execution_count="1">
+<div id="4e41f141" class="cell" data-fig-height="5" data-fig-width="11" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -487,7 +635,7 @@ Bolong Tang · Peize Zhang · Yi Zhi Zhang
 </section>
 <section id="k-1-vs.-a-smoother-fit" class="slide level2 center">
 <h2><span class="math inline">\(K = 1\)</span> vs.&nbsp;a smoother fit</h2>
-<div id="2dac8f8a" class="cell" data-fig-height="4.6" data-fig-width="11" data-execution_count="2">
+<div id="f1cf9293" class="cell" data-fig-height="4.6" data-fig-width="11" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
